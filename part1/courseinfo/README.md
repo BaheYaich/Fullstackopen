@@ -1,1 +1,1 @@
-Solutions of part 1 exercises
+Solutions of part 1 exercises from 1.1 - 1.5
