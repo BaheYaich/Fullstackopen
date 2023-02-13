@@ -4,12 +4,16 @@ const Statistics = ({good, neutral, bad, all, average, positivePercentage}) => {
   if (all !== 0) {
     return (
       <>
-        <StatisticsLine text='Good' value={good} />
-        <StatisticsLine text='Neutral' value={neutral} />
-        <StatisticsLine text='Bad' value={bad} />
-        <StatisticsLine text='All' value={all} />
-        <StatisticsLine text='Average' value={average} />
-        <StatisticsLine text='Positive percentage' value={positivePercentage}/><span> %</span>
+      <table>
+        <tbody>
+          <StatisticsLine text='Good' value={good} />
+          <StatisticsLine text='Neutral' value={neutral} />
+          <StatisticsLine text='Bad' value={bad} />
+          <StatisticsLine text='All' value={all} />
+          <StatisticsLine text='Average' value={average} />
+          <StatisticsLine text='Positive percentage' value={positivePercentage}/>
+        </tbody>
+      </table>
       </>
     )
   } 
@@ -24,7 +28,10 @@ const Button = ({handleReference, text}) => {
 
 const StatisticsLine = ({text, value}) => {
   return (
-    <p>{ text } : { value }</p>
+    <tr>
+      <td>{ text }</td>
+      <td>{ value }</td>
+    </tr>
   )
 }
 
@@ -36,7 +43,7 @@ const App = () => {
 
   const all = good + neutral + bad
   const average = all === 0 ? 0 : (good - bad) / all
-  const positivePercentage = all === 0 ? 0 : (good / all) * 100
+  const positivePercentage = all === 0 ? 0 : (good / all) * 100 + ' %'
 
   const handleGood = () => {setGood(good + 1)}
   const handleNeutral = () => {setNeutral(neutral + 1)}
