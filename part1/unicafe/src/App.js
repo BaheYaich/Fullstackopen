@@ -4,16 +4,28 @@ const Statistics = ({good, neutral, bad, all, average, positivePercentage}) => {
   if (all !== 0) {
     return (
       <>
-        <p>Good : { good }</p>
-        <p>Neutral : { neutral }</p>
-        <p>Bad : { bad }</p>
-        <p>All : { all }</p>
-        <p>Average : { average }</p>
-        <p>Positive percentage : { positivePercentage }</p>
+        <StatisticsLine text='Good' value={good} />
+        <StatisticsLine text='Neutral' value={neutral} />
+        <StatisticsLine text='Bad' value={bad} />
+        <StatisticsLine text='All' value={all} />
+        <StatisticsLine text='Average' value={average} />
+        <StatisticsLine text='Positive percentage' value={positivePercentage}/><span> %</span>
       </>
     )
   } 
   return (<p>No feedback given</p>)
+}
+
+const Button = ({handleReference, text}) => {
+  return (
+    <button onClick={ handleReference }>{ text }</button>
+  )
+}
+
+const StatisticsLine = ({text, value}) => {
+  return (
+    <p>{ text } : { value }</p>
+  )
 }
 
 const App = () => {
@@ -33,9 +45,9 @@ const App = () => {
   return (
     <div>
       <h2>Give feedback</h2>
-      <button onClick={handleGood}>Good</button>
-      <button onClick={handleNeutral}>Neutral</button>
-      <button onClick={handleBad}>Bad</button>
+      <Button handleReference={handleGood} text='Good' />
+      <Button handleReference={handleNeutral} text='Neutral' />
+      <Button handleReference={handleBad} text='Bad' />
       <h2>Statistics</h2>
       <Statistics good={good} neutral={neutral} bad={bad} all={all} average={average} positivePercentage={positivePercentage} />
     </div>
