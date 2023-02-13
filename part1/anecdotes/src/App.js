@@ -1,10 +1,7 @@
 import { useState } from 'react'
 
-const Votes = ({anecdoteVotes, selected}) => {
-  return(
-    <p>has {anecdoteVotes[selected]} votes</p>
-  )
-}
+const Votes = ({anecdoteVotes, selected}) => <p>has {anecdoteVotes[selected]} votes</p>
+const Anecdote = ({anecdotes, selected}) => <p>{anecdotes[selected]}</p>
 
 const App = () => {
   const anecdotes = [
@@ -20,6 +17,8 @@ const App = () => {
    
   const [selected, setSelected] = useState(0)
   const [anecdoteVotes, setAnecdoteVotes] = useState(Array(anecdotes.length).fill(0))
+  const maxValue = Math.max(...anecdoteVotes);
+  const maxValueIndex = anecdoteVotes.indexOf(maxValue);
 
   const generateRandomNumber = () =>  Math.floor(Math.random() * anecdotes.length)
   const handleVotes = () => {
@@ -32,10 +31,12 @@ const App = () => {
 
   return (
     <div>
-      <p>{anecdotes[selected]}</p>
+      <Anecdote anecdotes={anecdotes} selected={selected} />
       <Votes anecdoteVotes={anecdoteVotes} selected={selected}/>
       <button onClick={handleVotes}>Vote</button>
       <button onClick={() => {setSelected(generateRandomNumber())}}>Next anecdote</button>
+      <Anecdote anecdotes={anecdotes} selected={maxValueIndex} />
+      <Votes anecdoteVotes={anecdoteVotes} selected={maxValueIndex} />    
     </div>
   )
 }
