@@ -9,11 +9,14 @@ const App = () => {
   const [newName, setNewName] = useState('')
   const handleNewName = (event) => {
     event.preventDefault()
+    if (persons.find(person => person.name === newName)) return window.alert(`${newName} already exists in the phonebook`);
+    else {
     const person = {
       name: newName,
     }
     setPersons(persons.concat(person))
     setNewName("")
+    }
   }
 
   return (
