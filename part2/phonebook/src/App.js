@@ -13,7 +13,7 @@ const App = () => {
   useEffect(() => {
     personService
     .getAll()
-    .then(response => { setPersons(response.data) })
+    .then(response => { setPersons(response) })
   }, []);
 
   const filteredContacts = search === '' ? persons : persons.filter(person => person.name.toLowerCase().includes(search.toLowerCase()))
@@ -30,7 +30,7 @@ const App = () => {
       personService
         .create(personObject)
         .then(response => {
-          setPersons(persons.concat(response.data))
+          setPersons(persons.concat(response))
           setNewName('')
           setNewNumber('')
         })

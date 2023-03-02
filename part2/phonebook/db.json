@@ -24,6 +24,11 @@
       "name": "New Contact",
       "number": "123456798",
       "id": 5
+    },
+    {
+      "name": "Haytham",
+      "number": "123456789",
+      "id": 6
     }
   ]
 }
