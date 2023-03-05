@@ -20,7 +20,7 @@ const App = () => {
 
   const handleNewPerson = (event) => {
     event.preventDefault()
-    if (persons.find(person => person.name === newName)) return window.alert(`${newName} already exists in the phonebook`);
+    if (persons.find(person => person.name === newName)) return window.alert(`${newName} already exists in the phonebook`)
     else {
       event.preventDefault()
       const personObject = {
@@ -37,6 +37,17 @@ const App = () => {
       }
   }
 
+  const handleOnDelete = (name, id) => {
+    if (!window.confirm(`${name} is about to be deleted`)) return
+    personService
+      .delete(id)
+      .then(() => {
+        personService
+          .getAll()
+          .then(response => { setPersons(response) })
+      })
+  }
+
   return (
     <>
       <h2>Phonebook</h2>
@@ -44,7 +55,7 @@ const App = () => {
       <h3>Add new contact</h3>
       <PersonForm functionReference={handleNewPerson} setNewName={setNewName} newName={newName} setNewNumber={setNewNumber} newNumber={newNumber} />
       <h3>Numbers</h3>
-      {filteredContacts.map(persons => <Person key={persons.id} persons={persons} />)}
+      {filteredContacts.map(persons => <Person key={persons.id} persons={persons} handleDeleteContact={(name, id) => handleOnDelete(name, id)} />)}
     </>
   )
 }
