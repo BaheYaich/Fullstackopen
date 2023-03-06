@@ -1,0 +1,25 @@
+.message {
+    background: lightgrey;
+    font-size: 20px;
+    border-style: solid;
+    border-radius: 5px;
+    padding: 10px;
+    margin-bottom: 10px;
+    animation: fade-in-out 5s ease-in-out forwards;
+}
+
+.error {
+    color: red;
+}
+
+.success {
+    color: green;
+}
+
+@keyframes fade-in-out {
+    0% {opacity: 0;}
+    25% {opacity: 1;}
+    50% {opacity: 1;}
+    75% {opacity: 1;}
+    100% {opacity: 0;}
+}

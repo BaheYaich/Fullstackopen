@@ -3,12 +3,15 @@ import Person from './components/person'
 import PersonForm from './components/personForm'
 import Filter from './components/search'
 import personService from './services/persons'
+import Notification from './components/notification'
 
 const App = () => {
   const [persons, setPersons] = useState([])
   const [newName, setNewName] = useState('')
   const [newNumber, setNewNumber] = useState('')
   const [search, setSearch] = useState('')
+  const [message, setMessage] = useState(null)
+  const [messageType, setMessageType] = useState('success')
 
   useEffect(() => {
     personService
@@ -16,11 +19,16 @@ const App = () => {
     .then(response => { setPersons(response) })
   }, []);
 
-  const filteredContacts = persons.filter(person =>
-    person.name.toLowerCase().includes(search.toLowerCase())
-  )
-
+  const filteredContacts = persons.filter(person => person.name.toLowerCase().includes(search.toLowerCase()))
   const existingPerson = persons.find(person => person.name === newName)
+
+  const handleNotification = (message, type) => {
+    setMessageType(type)
+    setMessage(message)
+    setTimeout(() => {          
+      setMessage(null)        
+    }, 5000)  
+  }
 
   const handleNewPerson = (event) => {
     event.preventDefault()
@@ -33,7 +41,10 @@ const App = () => {
         .then(() => {
           personService
             .getAll()
-            .then(response => { setPersons(response) })
+            .then(response => { 
+              setPersons(response)
+              handleNotification(`'${existingPerson.name}' was updated`, 'success') 
+            })
         })
       }
     }
@@ -46,8 +57,9 @@ const App = () => {
         .create(personObject)
         .then(response => {
           setPersons(persons.concat(response))
+          handleNotification(`'${newName}' was added`, 'success') 
           setNewName('')
-          setNewNumber('')
+          setNewNumber('')     
         })
       }
   }
@@ -59,13 +71,17 @@ const App = () => {
       .then(() => {
         personService
           .getAll()
-          .then(response => { setPersons(response) })
+          .then(response => { 
+            setPersons(response) 
+            handleNotification(`'${name}' was deleted`, 'error') 
+          })
       })
   }
 
   return (
     <>
       <h2>Phonebook</h2>
+      <Notification message={message} type={messageType} />
       <Filter setSearch={setSearch} search={search} />
       <h3>Add new contact</h3>
       <PersonForm functionReference={handleNewPerson} setNewName={setNewName} newName={newName} setNewNumber={setNewNumber} newNumber={newNumber} />
