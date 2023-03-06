@@ -16,13 +16,28 @@ const App = () => {
     .then(response => { setPersons(response) })
   }, []);
 
-  const filteredContacts = search === '' ? persons : persons.filter(person => person.name.toLowerCase().includes(search.toLowerCase()))
+  const filteredContacts = persons.filter(person =>
+    person.name.toLowerCase().includes(search.toLowerCase())
+  )
+
+  const existingPerson = persons.find(person => person.name === newName)
 
   const handleNewPerson = (event) => {
     event.preventDefault()
-    if (persons.find(person => person.name === newName)) return window.alert(`${newName} already exists in the phonebook`)
+    if (existingPerson) {
+      if (!window.confirm(`${newName} already exists in the phonebook, replace the old number with the new one?`)) return
+      else {
+        const updatedPerson = { ...existingPerson, number: newNumber }
+        personService
+        .update(existingPerson.id, updatedPerson)
+        .then(() => {
+          personService
+            .getAll()
+            .then(response => { setPersons(response) })
+        })
+      }
+    }
     else {
-      event.preventDefault()
       const personObject = {
         name: newName,
         number: newNumber
@@ -55,7 +70,7 @@ const App = () => {
       <h3>Add new contact</h3>
       <PersonForm functionReference={handleNewPerson} setNewName={setNewName} newName={newName} setNewNumber={setNewNumber} newNumber={newNumber} />
       <h3>Numbers</h3>
-      {filteredContacts.map(persons => <Person key={persons.id} persons={persons} handleDeleteContact={(name, id) => handleOnDelete(name, id)} />)}
+      {filteredContacts.map(persons => <Person key={persons.id} persons={persons} handleDeleteContact={handleOnDelete} />)}
     </>
   )
 }
