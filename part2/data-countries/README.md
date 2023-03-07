@@ -1,0 +1,1 @@
+Solutions of part 2 exercises 2.18 - 2.20

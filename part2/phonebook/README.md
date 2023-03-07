@@ -1,1 +1,1 @@
-Solutions of part 2 exercises from 2.6 - 2.10
+Solutions of part 2 exercises from 2.6 - 2.17
