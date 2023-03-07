@@ -76,6 +76,10 @@ const App = () => {
             handleNotification(`'${name}' was deleted`, 'error') 
           })
       })
+      .catch(error => {      
+        handleNotification(`'${name}' was already deleted from server`, 'error')       
+        setPersons(persons.filter(person => person.id !== id))    
+      })
   }
 
   return (
