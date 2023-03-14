@@ -7,7 +7,7 @@ const DetailedCountry = ({ country }) => {
             <br />
             <h2>Languages :</h2>
             <ul>
-                {Object.getOwnPropertyNames(country.languages).map(language => <li>{country.languages[language]}</li>)}
+                {Object.getOwnPropertyNames(country.languages).map(language => <li key={country.languages[language]}>{country.languages[language]}</li>)}
             </ul>
             <p className='country-flag'>{country.flag}</p>
         </>

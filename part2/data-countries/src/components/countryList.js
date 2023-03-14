@@ -1,6 +1,6 @@
-const Country = ({ name }) => {
+const Country = ({ country, handleShowCountry }) => {
     return (
-        <p>{name}</p>
+        <p>{country.name.common} <button onClick={() => handleShowCountry(country)}>Show</button></p>
     )
 }
 

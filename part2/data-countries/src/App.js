@@ -2,48 +2,70 @@ import { useEffect, useState } from 'react'
 import countryService from './services/countries'
 import DetailedCountry from './components/detailedCountry'
 import Country from './components/countryList'
+import Searchbar from './components/searchbar'
+import SearchResults from './components/searchResults'
 
 const App = () => {
   const [search, setSearch] = useState('')
   const [countries, setCountries] = useState([])
   const filteredCountries = countries.filter(country => country.name.common.toLowerCase().includes(search.toLowerCase()))
-  const matchingCountries = filteredCountries.sort((a, b) => a.name.common.localeCompare(b.name.common))
+  let matchingCountries = filteredCountries.sort((a, b) => a.name.common.localeCompare(b.name.common))
+
+  const fetchCountries = () => {
+    countryService
+    .getAll()
+    .then(response => {
+      setCountries(response)
+    })
+    .catch(error => "Something went wrong..")
+  }
 
   useEffect(() => {
-    countryService
-      .getAll()
-      .then(response => {
-        setCountries(response)
-        console.log("fetch successful")
-      })
-      .catch(error => "Something went wrong..")
+    fetchCountries()
   }, [])
 
   const handleSearch = (e) => {
     setSearch(e.target.value)
-    console.log("search triggered", search)
+  }
+
+  const resetCountries = () => {
+    setSearch('')
+    fetchCountries()
   }
 
   const handleCountries = (length) => {
-    if (length > 10) {
+    if (length === 0 || search === ''){
+      return ( 
+        <p>No matches..</p>
+      )
+    } else if (length > 10) {
       return (
         <p>Too many matches, be more specific</p>
       )
     } else if (length > 1) {
       return (
-        matchingCountries.map(country => <Country key={country.name.common} name={country.name.common} />)
+        matchingCountries.map(country => <Country key={country.name.common} country={country} handleShowCountry={handleShowCountry} />)
       )
     } else if (length === 1) {
       return (
         <DetailedCountry country={matchingCountries[0]} />
       )
+    } else if (length === 0 || search === ''){
+      return ( 
+        <p>No matches..</p>
+      )
     }
+  }
+
+  const handleShowCountry = (country) => {
+    const matchingCountry = matchingCountries.filter(element => element === country)
+    setCountries(matchingCountry)
   }
 
   return (
     <>
-      <div>Find countries: <input name="searchbar" onChange={handleSearch} value={search} /></div>
-      {handleCountries(matchingCountries.length)}
+      <Searchbar handleSearch={handleSearch} search={search} resetCountries={resetCountries} />
+      <SearchResults handleCountries={handleCountries} matchingCountries={matchingCountries} />
     </>
   )
 }
