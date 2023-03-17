@@ -1,3 +1,5 @@
+import Weather from "./weather"
+
 const DetailedCountry = ({ country }) => {
     return (
         <>
@@ -10,6 +12,8 @@ const DetailedCountry = ({ country }) => {
                 {Object.getOwnPropertyNames(country.languages).map(language => <li key={country.languages[language]}>{country.languages[language]}</li>)}
             </ul>
             <p className='country-flag'>{country.flag}</p>
+            <h2>Weather in {country.capital}</h2>
+            <Weather country={country} />
         </>
     )
 }
