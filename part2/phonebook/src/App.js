@@ -90,7 +90,7 @@ const App = () => {
       <h3>Add new contact</h3>
       <PersonForm functionReference={handleNewPerson} setNewName={setNewName} newName={newName} setNewNumber={setNewNumber} newNumber={newNumber} />
       <h3>Numbers</h3>
-      {filteredContacts.map(persons => <Person key={persons.id} persons={persons} handleDeleteContact={handleOnDelete} />)}
+      <div className='contacts'>{filteredContacts.map(persons => <Person key={persons.id} persons={persons} handleDeleteContact={handleOnDelete} />)}</div>
     </>
   )
 }
