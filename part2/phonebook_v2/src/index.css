@@ -80,6 +80,7 @@ label {
 body {
   display: grid;
   place-items: center;
+  align-items: baseline;
   h2 {
       font-size: 3rem;
   }
