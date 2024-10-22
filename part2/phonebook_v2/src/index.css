@@ -115,6 +115,9 @@ body {
   }
 }
 .message {
+  position:absolute;
+  top: 1rem;
+  right: 1rem;
   background: lightgrey;
   font-size: 20px;
   border-style: solid;
