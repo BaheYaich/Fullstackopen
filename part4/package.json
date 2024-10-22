@@ -1,0 +1,31 @@
+{
+  "name": "part-4",
+  "version": "1.0.0",
+  "description": "Blog list exercise from Part 4 FullstackOpen",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node index.js",
+    "dev": "nodemon index.js",
+    "lint": "eslint ."
+  },
+  "author": "Bahe Yaich",
+  "license": "ISC",
+  "dependencies": {
+    "cors": "^2.8.5",
+    "dotenv": "^16.4.5",
+    "express": "^4.21.1",
+    "mongodb": "^6.9.0",
+    "mongoose": "^8.7.2",
+    "morgan": "^1.10.0",
+    "node-uuid": "^1.4.8",
+    "nodemon": "^3.1.7"
+  },
+  "devDependencies": {
+    "@eslint/js": "^9.13.0",
+    "@stylistic/eslint-plugin-js": "^2.9.0",
+    "eslint": "^9.13.0",
+    "eslint-plugin-react": "^7.37.1",
+    "globals": "^15.11.0"
+  }
+}

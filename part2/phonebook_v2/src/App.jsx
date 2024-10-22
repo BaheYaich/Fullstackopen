@@ -122,6 +122,7 @@ const App = () => {
         // Show success notification
         handleNotification(`'${name}' was deleted`, 'error');
       })
+      // eslint-disable-next-line no-unused-vars
       .catch(error => {
         // Handle any error (e.g., person already deleted from the server)
         handleNotification(

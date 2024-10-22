@@ -1,1 +1,3 @@
-Solutions of part 1 exercises 1.12 - 1.14
+# Fullstackopen part #1
+
+## Anecdotes

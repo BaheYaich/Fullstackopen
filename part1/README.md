@@ -1,1 +1,1 @@
-Solutions of part 1 exercises
+# Fullstackopen part #1
