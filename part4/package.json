@@ -4,10 +4,10 @@
   "description": "Blog list exercise from Part 4 FullstackOpen",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node index.js",
     "dev": "nodemon index.js",
-    "lint": "eslint ."
+    "lint": "eslint .",
+    "test": "node --test"
   },
   "author": "Bahe Yaich",
   "license": "ISC",

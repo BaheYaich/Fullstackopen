@@ -44,6 +44,7 @@ blogsRouter.get('/:id', (request, response, next) => {
 // Delete a blog by ID
 blogsRouter.delete('/:id', (request, response, next) => {
   Blog.findByIdAndDelete(request.params.id)
+    // eslint-disable-next-line no-unused-vars
     .then(result => response.status(204).end()) // Return 204 (No Content) if deletion is successful
     .catch(error => next(error))
 })
